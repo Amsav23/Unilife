@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route path={"/"} element={<HomePage />} />
         <Route path={"/HomeDetailsPage"} element={<HomeDetailsPage />} />
+        <Route path={"*"} element={<HomePage />} />
       </Routes>
     </BrowserRouter>
   );
