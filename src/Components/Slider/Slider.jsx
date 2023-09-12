@@ -1,10 +1,11 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './Slider.css'
 import background from '../../assets/cover-img.png'
 import SearchIcon from '../../assets/Search-icon.png'
 import CompareIcon from '../../assets/Compare-icon.png'
 import BillsIcon from '../../assets/Bills-Included-icon.png'
 import axios from 'axios';
+import { useParams } from 'react-router-dom'
 
 function Search({setTopCities}) {
   const [query, setQuery] = useState('');
@@ -22,7 +23,7 @@ function Search({setTopCities}) {
 
 
     .catch(err => {
-      if (err.response.status === 404){
+      if (err.response === 404){
         alert(`There is no city named ${query}`)
       }
       else{
@@ -32,6 +33,25 @@ function Search({setTopCities}) {
 
     //clear textbox
     setQuery('')
+  }
+
+
+  //see All cities
+  function CityDetails() {
+
+    const {cityId} = useParams();
+
+    const [city, setCity] = useState('');
+    React.useEffect(
+      ()=> {
+        axios.get(`https://unilife-server.herokuapp.com/cities/${cityId}`)
+        .then(res => {
+          console.log(res)
+          setCity(res)
+        })
+        .catch(err => console.log(err))
+      }, []
+    )
   }
 
 
@@ -66,7 +86,6 @@ function Search({setTopCities}) {
 
   return (
     <div className="slider-container">
-      <h1>Slider</h1>
       <img src={background} alt="background image"></img>
 
     <form className="search-container" onSubmit={handleSubmit}>
@@ -75,6 +94,14 @@ function Search({setTopCities}) {
                onChange={(e)=>setQuery(e.target.value)} />
 
     </form>
+
+    <h1>Student accomodations in our top cities</h1>
+    <div className='top-cities-container'>
+      <img src={city.image} />
+      <p>Name: {city.name}</p>
+    </div>
+
+    <button>See All Cities</button>
 
       <img src={SearchIcon} alt="Search-icon"></img>
       <img src={CompareIcon} alt="Compare-icon"></img>
