@@ -9,12 +9,15 @@ import { useParams } from 'react-router-dom'
 
 function Search({setTopCities}) {
   const [query, setQuery] = useState('');
-
+  const [cities, setCities] = useState([]);
+  const [city, setCity] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(query)
+    console.log("search")
 
+    useEffect(() => {
     //make API call to filter
+    console.log("running useEffect")
     axios.get(`https://unilife-server.herokuapp.com/cities/?name=${query}`)
     .then(res =>{
       console.log(res.data.response)
@@ -33,26 +36,48 @@ function Search({setTopCities}) {
 
     //clear textbox
     setQuery('')
-  }
+  
+    }, [])
+
+  //   //make API call to filter
+  //   axios.get(`https://unilife-server.herokuapp.com/cities/?name=${query}`)
+  //   .then(res =>{
+  //     console.log(res.data.response)
+  //     setTopCities(res.data.response)
+  //   })
+
+
+  //   .catch(err => {
+  //     if (err.response === 404){
+  //       alert(`There is no city named ${query}`)
+  //     }
+  //     else{
+  //       console.log(err)
+  //     }
+  //   })
+
+  //   //clear textbox
+  //   setQuery('')
+  // }
 
 
   //see All cities
-  function CityDetails() {
+  // function CityDetails() {
 
-    const {cityId} = useParams();
+  //   const {cityId} = useParams();
 
-    const [city, setCity] = useState('');
-    React.useEffect(
-      ()=> {
-        axios.get(`https://unilife-server.herokuapp.com/cities/${cityId}`)
-        .then(res => {
-          console.log(res)
-          setCity(res)
-        })
-        .catch(err => console.log(err))
-      }, []
-    )
-  }
+  //   const [city, setCity] = useState('');
+  //   React.useEffect(
+  //     ()=> {
+  //       axios.get(`https://unilife-server.herokuapp.com/cities/${cityId}`)
+  //       .then(res => {
+  //         console.log(res)
+  //         setCity(res)
+  //       })
+  //       .catch(err => console.log(err))
+  //     }, []
+  //   )
+  // }
 
 
 
@@ -83,7 +108,7 @@ function Search({setTopCities}) {
   };
 */
 
-
+  console.log("end slider")
   return (
     <div className="slider-container">
       <img src={background} alt="background image"></img>
@@ -97,8 +122,8 @@ function Search({setTopCities}) {
 
     <h1>Student accomodations in our top cities</h1>
     <div className='top-cities-container'>
-      <img src={city.image} />
-      <p>Name: {city.name}</p>
+      {/*<img src={city.image} />
+      <p>Name: {city.name}</p>*/}
     </div>
 
     <button>See All Cities</button>
@@ -109,6 +134,6 @@ function Search({setTopCities}) {
 
     </div>
   )
-}
+}}
 
 export default Search
