@@ -5,9 +5,8 @@ import SearchIcon from '../../assets/Search-icon.png'
 import CompareIcon from '../../assets/Compare-icon.png'
 import BillsIcon from '../../assets/Bills-Included-icon.png'
 import axios from 'axios';
-import { useParams } from 'react-router-dom'
 
-function Slider({setTopCities}) {
+function Slider() {
   const [query, setQuery] = useState('');
   const [cities, setCities] = useState([]);
 
@@ -15,11 +14,11 @@ function Slider({setTopCities}) {
     //make API call to filter
     console.log("running useEffect")
     axios.get(`https://unilife-server.herokuapp.com/cities/?name=${query}&limit=20`)
+
     .then(res =>{
       console.log(res.data.response)
       setCities(res.data.response)
     })
-
     .catch(err => {
       if (err.response === 404){
         alert(`There is no city named ${query}`)
@@ -31,7 +30,7 @@ function Slider({setTopCities}) {
 
     //clear textbox
     setQuery('')
-  
+
     }, []);
 
 
@@ -41,12 +40,12 @@ function Slider({setTopCities}) {
   }
 
 
-
   console.log("end slider")
   return (
     <div className="slider-container">
       <img src={background} alt="background image"></img>
 
+{/*Search Functionality*/}
       <form className="search-container" onSubmit={handleSubmit}>
         <input
           type="text"
@@ -56,12 +55,13 @@ function Slider({setTopCities}) {
         />
       </form>
 
+{/*City Cards*/}
       <h1>Student accomodations in our top cities</h1>
       <div className='top-cities-container'>
         {cities.slice(0, 9).map((city) => (
           <>
             <img src={city.image_url} />
-            <p>Name: {city.name}</p>
+            <p className='city-name'>{city.name}</p>
           </>
         ))}
       </div>
