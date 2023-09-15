@@ -62,15 +62,20 @@ function Slider() {
           <>
             <img src={city.image_url} />
             <p className='city-name'>{city.name}</p>
+            {/* <p>{city.property_count} properties</p> */}
           </>
         ))}
       </div>
 
       <button>See All Cities</button>
 
-      <img src={SearchIcon} alt="Search-icon"></img>
-      <img src={CompareIcon} alt="Compare-icon"></img>
-      <img src={BillsIcon} alt="Bills-icon"></img>
+      <h1>Compare all inclusive student homes.</h1>
+
+      <div className='icons'>
+        <img src={SearchIcon} alt="Search-icon"></img>
+        <img src={CompareIcon} alt="Compare-icon"></img>
+        <img src={BillsIcon} alt="Bills-icon"></img>
+      </div>
     </div>
   );
 }

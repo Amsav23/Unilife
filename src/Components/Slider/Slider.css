@@ -38,9 +38,14 @@
 
     position: relative;
     /* position: absolute; */
-    
+
     right: 180px;
     font-weight: bold;
     color: white;
     font-size: 25px;
+}
+
+.icons {
+    display: flex;
+    justify-content: space-evenly;
 }

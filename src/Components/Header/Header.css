@@ -1,5 +1,5 @@
 .header-container {
-    background-color: lightblue;
+    background-color: var(--sky-blue);
     color: white;
     min-height: 50px;
     font-size: 30px;
