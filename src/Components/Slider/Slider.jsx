@@ -7,23 +7,18 @@ import BillsIcon from '../../assets/Bills-Included-icon.png'
 import axios from 'axios';
 import { useParams } from 'react-router-dom'
 
-function Search({setTopCities}) {
+function Slider({setTopCities}) {
   const [query, setQuery] = useState('');
   const [cities, setCities] = useState([]);
-  const [city, setCity] = useState('');
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("search")
 
-    useEffect(() => {
+  useEffect(() => {
     //make API call to filter
     console.log("running useEffect")
-    axios.get(`https://unilife-server.herokuapp.com/cities/?name=${query}`)
+    axios.get(`https://unilife-server.herokuapp.com/cities/?name=${query}&limit=20`)
     .then(res =>{
       console.log(res.data.response)
-      setTopCities(res.data.response)
+      setCities(res.data.response)
     })
-
 
     .catch(err => {
       if (err.response === 404){
@@ -37,103 +32,47 @@ function Search({setTopCities}) {
     //clear textbox
     setQuery('')
   
-    }, [])
-
-  //   //make API call to filter
-  //   axios.get(`https://unilife-server.herokuapp.com/cities/?name=${query}`)
-  //   .then(res =>{
-  //     console.log(res.data.response)
-  //     setTopCities(res.data.response)
-  //   })
+    }, []);
 
 
-  //   .catch(err => {
-  //     if (err.response === 404){
-  //       alert(`There is no city named ${query}`)
-  //     }
-  //     else{
-  //       console.log(err)
-  //     }
-  //   })
-
-  //   //clear textbox
-  //   setQuery('')
-  // }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("search")
+  }
 
 
-  //see All cities
-  // function CityDetails() {
-
-  //   const {cityId} = useParams();
-
-  //   const [city, setCity] = useState('');
-  //   React.useEffect(
-  //     ()=> {
-  //       axios.get(`https://unilife-server.herokuapp.com/cities/${cityId}`)
-  //       .then(res => {
-  //         console.log(res)
-  //         setCity(res)
-  //       })
-  //       .catch(err => console.log(err))
-  //     }, []
-  //   )
-  // }
-
-
-
-/*
-  useEffect(()=>{
-    axios(
-      `${import.meta.env.VITE_API_BASE_URL}`)
-
-    .then((res) => {
-    console.log(res.data.response);
-    setTopCities(res.data.response);
-  })
-
-    .catch((err) => console.log(err));
-  }, []);
-*/
-
-/*
-  const sliderStyle = {
-    backgroundImage: `url(${import.meta.env.VITE_API_BASE_URL}${topCities[0]})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    height: "60vh",
-    width: "50%",
-    position: "relative",
-    zIndex: 0
-  };
-*/
 
   console.log("end slider")
   return (
     <div className="slider-container">
       <img src={background} alt="background image"></img>
 
-    <form className="search-container" onSubmit={handleSubmit}>
-        <input type="text" value={query}
-               placeholder="Search by city"
-               onChange={(e)=>setQuery(e.target.value)} />
+      <form className="search-container" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={query}
+          placeholder="Search by city"
+          onChange={(e)=>setQuery(e.target.value)}
+        />
+      </form>
 
-    </form>
+      <h1>Student accomodations in our top cities</h1>
+      <div className='top-cities-container'>
+        {cities.slice(0, 9).map((city) => (
+          <>
+            <img src={city.image_url} />
+            <p>Name: {city.name}</p>
+          </>
+        ))}
+      </div>
 
-    <h1>Student accomodations in our top cities</h1>
-    <div className='top-cities-container'>
-      {/*<img src={city.image} />
-      <p>Name: {city.name}</p>*/}
-    </div>
-
-    <button>See All Cities</button>
+      <button>See All Cities</button>
 
       <img src={SearchIcon} alt="Search-icon"></img>
       <img src={CompareIcon} alt="Compare-icon"></img>
       <img src={BillsIcon} alt="Bills-icon"></img>
-
     </div>
-  )
-}}
+  );
+}
 
-export default Search
+export default Slider;

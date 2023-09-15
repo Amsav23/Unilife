@@ -1,11 +1,11 @@
 import React from 'react'
 import './Homepage.css'
-import Search from '../Components/Slider/Slider'
+import Slider from '../Components/Slider/Slider'
 
 function HomePage() {
   return (
     <div className="homepage-container">
-      <Search />
+      <Slider />
       </div>
   )
 }
