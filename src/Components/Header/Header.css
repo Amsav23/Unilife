@@ -1,8 +1,86 @@
 .header-container {
     background-color: var(--sky-blue);
-    color: white;
+    color: var(--white);
     min-height: 50px;
     font-size: 30px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header-left {
+    margin-left: 70px;
+    text-decoration-line: none;
+}
+
+.header-title {
+    text-decoration-line: none;
+}
+
+.header-right {
+    margin-right: 50px;
+    display: flex;
+}
+
+p {
+    display: flex;
+    margin-right: 50px;
+    color: var(--white);
+}
+
+.header-right p {
+    font-size: 20px;
+}
+
+.header-icon {
+    display: flex;
+    align-self: center;
+    margin-right: 10px;
+}
+
+.contact-btn {
+    cursor: pointer;
+}
+
+
+/*MODAL FORM*/
+
+.contact-modal-container {
+    border: solid 2px yellow;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 600px;
+    height: 450px;
+}
+
+.contact-modal-header {
+    border: 2px red solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 30vh;
+}
+
+.contact-modal-header p {
+    color: var(--black);
+}
+
+.contact-modal-form {
+    border: solid green 2px;
+    /* display: flex; */
+    padding: 10px;
+    /* flex-direction: row; */
+
+    height: 90vh;
+}
+
+.submit-btn {
+    background-color: navy;
+    color: var(--white);
+    padding: 10px 100px;
+    border: none;
+    border-radius: 8px;
 }
